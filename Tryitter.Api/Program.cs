@@ -1,4 +1,3 @@
-
 namespace Tryitter.Api;
 
 public class Program
