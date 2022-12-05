@@ -6,9 +6,9 @@ namespace Tryitter.Api.Database
 {
     public class TryitterContext : DbContext
     {
-        public DbSet<Student> Students { get; set; }
-        public DbSet<Post> Posts { get; set; }
-        public DbSet<Module> Modules { get; set; }
+        public DbSet<Student>? Students { get; set; }
+        public DbSet<Post>? Posts { get; set; }
+        public DbSet<Module>? Modules { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

@@ -43,5 +43,24 @@ public class WeatherForecastController : ControllerBase
         tryitterContext.SaveChanges();
 
         return tryitterContext.Modules.ToArray();
+
+        // GET /students
+        // GET /students/{id}
+        // GET /students?name=
+        // POST /students
+        // PUT /students/{id}
+        // DELETE /students/{id}
+
+        // POST /login
+
+        // GET /posts
+        // GET /posts/last
+        // GET /posts/{id}
+        // POST /posts
+        // PUT /posts/{id}
+        // DELETE /posts/{id}
+
+        // GET /posts?name=
+        // GET /posts/last?name=
     }
 }
