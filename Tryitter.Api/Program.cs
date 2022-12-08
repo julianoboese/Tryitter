@@ -14,9 +14,11 @@ public class Program
         // Add services to the container.
 
         builder.Services.AddControllers();
-        builder.Services.AddDbContext<TryitterApiContext>();
-        builder.Services.AddScoped<ITryitterApiContext, TryitterApiContext>();
-        builder.Services.AddScoped<ITryitterApiRepository, TryitterApiRepository>();
+        builder.Services.AddDbContext<TryitterContext>();
+        builder.Services.AddScoped<ITryitterContext, TryitterContext>();
+        builder.Services.AddScoped<IStudentRepository, StudentRepository>();
+        builder.Services.AddScoped<IPostRepository, PostRepository>();
+
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();

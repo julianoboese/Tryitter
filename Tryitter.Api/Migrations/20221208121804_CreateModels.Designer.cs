@@ -4,14 +4,14 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Tryitter.Api.Database;
+using tryitter_api.Repository;
 
 #nullable disable
 
 namespace Tryitter.Api.Migrations
 {
     [DbContext(typeof(TryitterContext))]
-    [Migration("20221205184032_CreateModels")]
+    [Migration("20221208121804_CreateModels")]
     partial class CreateModels
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
