@@ -1,9 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
 namespace Tryitter.Api.Models
 {
     public class Student
     {
+        [Key]
         public int StudentId { get; set; }
         public string Name { get; set;}
         public string Email { get; set;}
