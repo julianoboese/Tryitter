@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using System.Reflection.Metadata;
 using Tryitter.Api.Models;
 
 namespace tryitter_api.Repository;
@@ -28,6 +29,13 @@ public class TryitterContext : DbContext, ITryitterContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<Module>().HasData(
+            new Module { ModuleId = 1, Name = "Fundamentos" },
+            new Module { ModuleId = 2, Name = "Front-end" },
+            new Module { ModuleId = 3, Name = "Back-end" },
+            new Module { ModuleId = 4, Name = "Ciência da Computação" }
+        );
+
         modelBuilder.Entity<Student>()
             .HasOne(s => s.Module)
             .WithMany(m => m.Students)
