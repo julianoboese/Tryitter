@@ -1,4 +1,4 @@
-namespace Tryitter.Api;
+using tryitter_api.Repository;
 
 public class Program
 {
@@ -9,6 +9,9 @@ public class Program
         // Add services to the container.
 
         builder.Services.AddControllers();
+        builder.Services.AddDbContext<TryitterApiContext>();
+        builder.Services.AddScoped<ITryitterApiContext, TryitterApiContext>();
+        builder.Services.AddScoped<ITryitterApiRepository, TryitterApiRepository>();
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
