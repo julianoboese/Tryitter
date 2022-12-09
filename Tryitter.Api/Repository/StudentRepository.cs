@@ -11,33 +11,51 @@ public class StudentRepository : IStudentRepository
     _context = context;
   }
 
-    public Student AddStudent(Student student)
+    public bool AddStudent(Student student)
     {
-        throw new NotImplementedException();
+        var studentById = GetStudentById(student.StudentId);
+
+        if (studentById != null) return false;
+
+        _context.Students.Add(student);
+
+        return true;
     }
 
-    public Student DeleteStudent(int id)
+    public bool DeleteStudent(Student student)
     {
-        throw new NotImplementedException();
+        var studentById = GetStudentById(student.StudentId);
+
+        if (studentById is null) return false;
+
+        _context.Students.Remove(student);
+
+        return true;
     }
 
     public Student GetStudentById(int studentId)
     {
-        throw new NotImplementedException();
+        return _context.Students.Find(studentId)!;
     }
 
     public Student GetStudentByName(string name)
     {
-        throw new NotImplementedException();
+        return _context.Students.Find(name)!;
     }
 
-    public Student GetStudents()
+    public IEnumerable<Student> GetStudents()
     {
-        throw new NotImplementedException();
+        return _context.Students.AsEnumerable();
     }
 
-    public Student UpdateStudent(Student student, int id)
+    public bool UpdateStudent(Student student, int studentId)
     {
-        throw new NotImplementedException();
+        var studentById = GetStudentById(studentId);
+
+        if (studentById is null) return false;
+
+        _context.Students.Update(student);
+
+        return true;
     }
 }

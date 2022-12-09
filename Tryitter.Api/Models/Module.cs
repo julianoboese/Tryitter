@@ -7,7 +7,7 @@ namespace Tryitter.Api.Models
     {
         [Key]
         public int ModuleId { get; set; }
-        public string Name { get; set; }
+        public string? Name { get; set; }
         public ICollection<Student>? Students { get; set; }
     }
 }
