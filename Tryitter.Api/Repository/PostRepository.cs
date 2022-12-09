@@ -11,14 +11,26 @@ public class PostRepository : IPostRepository
     _context = context;
   }
 
-    public Post AddPost(Post post)
+    public bool AddPost(Post post)
     {
-        throw new NotImplementedException();
+        var postById = GetPostById(post.PostId);
+
+        if (postById != null) return false;
+
+        _context.Posts.Add(post);
+
+        return true;
     }
 
-    public Post DeletePost(int id)
+    public bool DeletePost(Post post)
     {
-        throw new NotImplementedException();
+        var postById = GetPostById(post.PostId);
+
+        if (postById is null) return false;
+
+        _context.Posts.Remove(post);
+
+        return true;
     }
 
     public Post GetLastPostById(int studentId)
@@ -28,16 +40,27 @@ public class PostRepository : IPostRepository
 
     public Post GetPostById(int postId)
     {
-        throw new NotImplementedException();
+        return _context.Posts.Find(postId)!;
     }
 
-    public Post GetPosts()
+    public IEnumerable<Post> GetPosts()
     {
-        throw new NotImplementedException();
+        return _context.Posts.AsEnumerable();
     }
 
-    public Post UpdatePost(Post post, int id)
+    public bool UpdatePost(Post post, int postId)
     {
-        throw new NotImplementedException();
+        var postById = GetPostById(postId);
+
+        if (postById is null) return false;
+
+        _context.Posts.Update(post);
+
+        return true;
     }
+
+  /*Post IPostRepository.AddPost(Post post)
+  {
+    throw new NotImplementedException();
+  }*/
 }

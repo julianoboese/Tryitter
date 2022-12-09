@@ -6,9 +6,9 @@ namespace tryitter_api.Repository
     {
         Post GetPostById(int postId);
         Post GetLastPostById(int studentId);
-        Post GetPosts();
-        Post AddPost(Post post);
-        Post UpdatePost(Post post, int id);
-        Post DeletePost(int id);
+        IEnumerable<Post> GetPosts();
+        bool AddPost(Post post);
+        bool UpdatePost(Post post, int postId);
+        bool DeletePost(Post post);
     }
 }
