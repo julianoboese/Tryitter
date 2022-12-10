@@ -1,46 +1,16 @@
+using System.Xml.Linq;
+using Tryitter.Api.DTOs;
 using Tryitter.Api.Models;
 
 namespace tryitter_api.Repository;
 
 public class StudentRepository : IStudentRepository
 {
-  private readonly ITryitterContext _context;
+    private readonly ITryitterContext _context;
 
-  public StudentRepository(ITryitterContext context)
-  {
-    _context = context;
-  }
-
-    public bool AddStudent(Student student)
+    public StudentRepository(ITryitterContext context)
     {
-        var studentById = GetStudentById(student.StudentId);
-
-        if (studentById != null) return false;
-
-        _context.Students.Add(student);
-
-        return true;
-    }
-
-    public bool DeleteStudent(Student student)
-    {
-        var studentById = GetStudentById(student.StudentId);
-
-        if (studentById is null) return false;
-
-        _context.Students.Remove(student);
-
-        return true;
-    }
-
-    public Student GetStudentById(int studentId)
-    {
-        return _context.Students.Find(studentId)!;
-    }
-
-    public Student GetStudentByName(string name)
-    {
-        return _context.Students.Find(name)!;
+        _context = context;
     }
 
     public IEnumerable<Student> GetStudents()
@@ -48,14 +18,44 @@ public class StudentRepository : IStudentRepository
         return _context.Students.AsEnumerable();
     }
 
-    public bool UpdateStudent(Student student, int studentId)
+    public Student GetStudentById(int studentId)
     {
-        var studentById = GetStudentById(studentId);
+        return _context.Students.Find(studentId)!;
+    }
 
-        if (studentById is null) return false;
+    public Student GetStudentByEmailAndPassword(AuthInput authInput)
+    {
+        return _context.Students.First(s => s.Email == authInput.Email && s.Password == authInput.Password);
+    }
 
+    public IEnumerable<Student> GetStudentsByName(string name)
+    {
+        return _context.Students.Where(s => s.Name.Contains(name));
+    }
+
+    public Student AddStudent(Student student)
+    {
+        _context.Students.Add(student);
+
+        _context.SaveChanges();
+
+        return student;
+    }
+
+    public Student UpdateStudent(Student student)
+    {
         _context.Students.Update(student);
 
-        return true;
+        _context.SaveChanges();
+
+        return student;
+    }
+    public Student DeleteStudent(Student student)
+    {
+        _context.Students.Remove(student);
+
+        _context.SaveChanges();
+
+        return student;
     }
 }
