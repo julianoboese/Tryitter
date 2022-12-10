@@ -1,36 +1,47 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Tryitter.Api.DTOs;
 using Tryitter.Api.Models;
 using Tryitter.Api.Services;
 using Tryitter.Api.ViewModels;
+using tryitter_api.Repository;
 
 namespace Tryitter.Api.Controllers
 {
+    [ApiController]
+    [Route("[controller]")]
     public class AuthController : ControllerBase
     {
-        [HttpPost]
-        public ActionResult<StudentViewModel> Authenticate([FromBody] Student student)
+        private readonly IStudentRepository _studentRepository;
+
+        public AuthController(IStudentRepository studentRepository)
         {
-            StudentViewModel studentViewModel = new();
+            _studentRepository = studentRepository;
+        }
+
+        [HttpPost]
+        public ActionResult<AuthOutput> Authenticate([FromBody] AuthInput authInput)
+        {
+            AuthOutput authOutput = new();
 
             try
             {
-                //userViewModel.Student = new StudentRepository().Get(student);
+                authOutput.Student = _studentRepository.GetStudentByEmailAndPassword(authInput);
 
-                if (studentViewModel.Student == null)
+                if (authOutput.Student == null)
                 {
-                    return NotFound("Student not found!");
+                    return NotFound("Pessoa estudante não encontrada.");
                 }
 
-                studentViewModel.Token = new TokenGenerator().Generate();
+                authOutput.Token = new TokenGenerator().Generate();
 
-                studentViewModel.Student.Password = string.Empty;
+                authOutput.Student.Password = string.Empty;
             }
             catch (Exception exception)
             {
                 return BadRequest(exception.Message);
             }
 
-            return studentViewModel;
+            return authOutput;
         }
     }
 }
