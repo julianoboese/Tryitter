@@ -7,9 +7,9 @@ namespace Tryitter.Api.Models
     {
         [Key]
         public int PostId { get; set; }
-        public string? Description { get; set; }
+        public string Description { get; set; }
         public int StudentId { get; set; }
         [ForeignKey("StudentId")]
-        public Student? Student { get; set; }
+        public Student Student { get; set; }
     }
 }
