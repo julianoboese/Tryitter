@@ -3,10 +3,10 @@ using Tryitter.Api.Services;
 
 namespace Tryitter.Test;
 
-public class TestTokenGenerator
+public class TokenGeneratorTest
 {
     [Fact(DisplayName = "Teste para geração de Token.")]
-    public void TestTokenGeneratorSuccess()
+    public void TestTokenGenerator()
     {
         var token = new TokenGenerator().Generate();
 
