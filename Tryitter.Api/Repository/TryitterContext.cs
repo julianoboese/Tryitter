@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Tryitter.Api.Models;
 
-namespace tryitter_api.Repository;
+namespace Tryitter.Api.Repository;
 
 public class TryitterContext : DbContext, ITryitterContext
 {

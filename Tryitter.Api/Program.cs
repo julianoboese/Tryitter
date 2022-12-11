@@ -5,7 +5,7 @@ using System.Text;
 namespace Tryitter.Api;
 using Microsoft.OpenApi.Models;
 
-using tryitter_api.Repository;
+using Tryitter.Api.Repository;
 
 public class Program
 {

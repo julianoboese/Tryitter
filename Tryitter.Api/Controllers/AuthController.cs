@@ -2,7 +2,7 @@
 using Tryitter.Api.DTOs;
 using Tryitter.Api.Services;
 using Tryitter.Api.ViewModels;
-using tryitter_api.Repository;
+using Tryitter.Api.Repository;
 
 namespace Tryitter.Api.Controllers
 {

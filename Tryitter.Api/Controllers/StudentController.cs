@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Tryitter.Api.DTOs;
 using Tryitter.Api.Models;
-using tryitter_api.Repository;
+using Tryitter.Api.Repository;
 
 namespace Tryitter.Api.Controllers;
 
