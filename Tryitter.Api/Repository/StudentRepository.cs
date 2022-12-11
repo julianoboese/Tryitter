@@ -1,4 +1,3 @@
-using System.Xml.Linq;
 using Tryitter.Api.DTOs;
 using Tryitter.Api.Models;
 
@@ -15,7 +14,7 @@ public class StudentRepository : IStudentRepository
 
     public IEnumerable<Student> GetStudents()
     {
-        return _context.Students.AsEnumerable();
+        return _context.Students;
     }
 
     public Student GetStudentById(int studentId)
