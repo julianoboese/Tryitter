@@ -17,14 +17,14 @@ public class StudentRepository : IStudentRepository
         return _context.Students;
     }
 
-    public Student GetStudentById(int studentId)
+    public Student? GetStudentById(int studentId)
     {
-        return _context.Students.Find(studentId)!;
+        return _context.Students.Find(studentId);
     }
 
-    public Student GetStudentByEmailAndPassword(AuthInput authInput)
+    public Student? GetStudentByEmailAndPassword(AuthInput authInput)
     {
-        return _context.Students.First(s => s.Email == authInput.Email && s.Password == authInput.Password);
+        return _context.Students.FirstOrDefault(s => s.Email == authInput.Email && s.Password == authInput.Password);
     }
 
     public IEnumerable<Student> GetStudentsByName(string name)

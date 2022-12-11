@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Tryitter.Api.DTOs;
-using Tryitter.Api.Models;
 using Tryitter.Api.Services;
 using Tryitter.Api.ViewModels;
 using tryitter_api.Repository;
@@ -25,16 +24,16 @@ namespace Tryitter.Api.Controllers
 
             try
             {
-                authOutput.Student = _studentRepository.GetStudentByEmailAndPassword(authInput);
+                var student = _studentRepository.GetStudentByEmailAndPassword(authInput);
 
-                if (authOutput.Student == null)
+                if (student == null)
                 {
                     return NotFound("Pessoa estudante não encontrada.");
                 }
 
-                authOutput.Token = new TokenGenerator().Generate();
-
+                authOutput.Student = student;
                 authOutput.Student.Password = string.Empty;
+                authOutput.Token = new TokenGenerator().Generate();
             }
             catch (Exception exception)
             {

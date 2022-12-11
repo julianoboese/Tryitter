@@ -1,7 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
-
-namespace Tryitter.Api.Models
+﻿namespace Tryitter.Api.Models
 {
     public class Student
     {
@@ -11,8 +8,6 @@ namespace Tryitter.Api.Models
         public string Password { get; set;}
 
         public int ModuleId { get; set;}
-        public Module Module { get; set; }
-
-        public ICollection<Post>? Posts { get; set; }
+        public virtual Module Module { get; set; }
     }
 }
