@@ -2,7 +2,7 @@
 
 namespace Tryitter.Api.ViewModels
 {
-    public class StudentViewModel
+    public class AuthOutput
     {
         public Student Student { get; set; }
         public string Token { get; set; }

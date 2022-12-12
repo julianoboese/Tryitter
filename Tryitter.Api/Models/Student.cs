@@ -1,18 +1,13 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
-
-namespace Tryitter.Api.Models
+﻿namespace Tryitter.Api.Models
 {
     public class Student
     {
-        [Key]
         public int StudentId { get; set; }
-        public string? Name { get; set;}
-        public string? Email { get; set;}
-        public string? Password { get; set;}
+        public string Name { get; set;}
+        public string Email { get; set;}
+        public string Password { get; set;}
+
         public int ModuleId { get; set;}
-        [ForeignKey("ModuleId")]
-        public Module? Module { get; set; }
-        public ICollection<Post>? Posts { get; set; }
+        public virtual Module Module { get; set; }
     }
 }

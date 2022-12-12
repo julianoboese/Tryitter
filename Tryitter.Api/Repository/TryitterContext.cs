@@ -1,5 +1,4 @@
 using Microsoft.EntityFrameworkCore;
-using System.Reflection.Metadata;
 using Tryitter.Api.Models;
 
 namespace tryitter_api.Repository;
@@ -38,12 +37,12 @@ public class TryitterContext : DbContext, ITryitterContext
 
         modelBuilder.Entity<Student>()
             .HasOne(s => s.Module)
-            .WithMany(m => m.Students)
+            .WithMany()
             .HasForeignKey(s => s.ModuleId);
 
         modelBuilder.Entity<Post>()
             .HasOne(p => p.Student)
-            .WithMany(s => s.Posts)
+            .WithMany()
             .HasForeignKey(p => p.PostId);
     }
 }
