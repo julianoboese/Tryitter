@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Tryitter.Api.Repository;
 
@@ -10,9 +11,10 @@ using Tryitter.Api.Repository;
 namespace Tryitter.Api.Migrations
 {
     [DbContext(typeof(TryitterContext))]
-    partial class TryitterContextModelSnapshot : ModelSnapshot
+    [Migration("20221208121804_CreateModels")]
+    partial class CreateModels
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -36,28 +38,6 @@ namespace Tryitter.Api.Migrations
                     b.HasKey("ModuleId");
 
                     b.ToTable("Modules");
-
-                    b.HasData(
-                        new
-                        {
-                            ModuleId = 1,
-                            Name = "Fundamentos"
-                        },
-                        new
-                        {
-                            ModuleId = 2,
-                            Name = "Front-end"
-                        },
-                        new
-                        {
-                            ModuleId = 3,
-                            Name = "Back-end"
-                        },
-                        new
-                        {
-                            ModuleId = 4,
-                            Name = "Ciência da Computação"
-                        });
                 });
 
             modelBuilder.Entity("Tryitter.Api.Models.Post", b =>

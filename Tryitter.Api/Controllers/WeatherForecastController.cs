@@ -1,11 +1,12 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Tryitter.Api.Database;
 using Tryitter.Api.Models;
 
 namespace Tryitter.Api.Controllers;
 
 [ApiController]
 [Route("[controller]")]
+[Authorize]
 public class WeatherForecastController : ControllerBase
 {
     private static readonly string[] Summaries = new[]
@@ -21,28 +22,28 @@ public class WeatherForecastController : ControllerBase
     }
 
     [HttpGet(Name = "GetWeatherForecast")]
-    public IEnumerable<Module> Get()
+    public IEnumerable<WeatherForecast> Get()
     {
-        //return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-        //{
-        //    Date = DateTime.Now.AddDays(index),
-        //    TemperatureC = Random.Shared.Next(-20, 55),
-        //    Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-        //})
-        //.ToArray();
+        return Enumerable.Range(1, 5).Select(index => new WeatherForecast
+        {
+            Date = DateTime.Now.AddDays(index),
+            TemperatureC = Random.Shared.Next(-20, 55),
+            Summary = Summaries[Random.Shared.Next(Summaries.Length)]
+        })
+        .ToArray();
 
-        var tryitterContext = new TryitterContext();
+        //var tryitterContext = new TryitterContext();
 
-        tryitterContext.Database.EnsureCreated();
+        //tryitterContext.Database.EnsureCreated();
 
-        var moduleOne = new Module() { Name = "Fundamentos" };
-        var moduleTwo = new Module() { Name = "Front-End" };
+        //var moduleOne = new Module() { Name = "Fundamentos" };
+        //var moduleTwo = new Module() { Name = "Front-End" };
 
-        tryitterContext.Modules.Add(moduleOne);
-        tryitterContext.Modules.Add(moduleTwo);
-        tryitterContext.SaveChanges();
+        //tryitterContext.Modules.Add(moduleOne);
+        //tryitterContext.Modules.Add(moduleTwo);
+        //tryitterContext.SaveChanges();
 
-        return tryitterContext.Modules.ToArray();
+        //return tryitterContext.Modules.ToArray();
 
         // GET /students
         // GET /students/{id}

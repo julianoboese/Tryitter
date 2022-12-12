@@ -4,15 +4,15 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Tryitter.Api.Database;
+using Tryitter.Api.Repository;
 
 #nullable disable
 
 namespace Tryitter.Api.Migrations
 {
     [DbContext(typeof(TryitterContext))]
-    [Migration("20221205184032_CreateModels")]
-    partial class CreateModels
+    [Migration("20221208130829_AddModules")]
+    partial class AddModules
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -38,6 +38,28 @@ namespace Tryitter.Api.Migrations
                     b.HasKey("ModuleId");
 
                     b.ToTable("Modules");
+
+                    b.HasData(
+                        new
+                        {
+                            ModuleId = 1,
+                            Name = "Fundamentos"
+                        },
+                        new
+                        {
+                            ModuleId = 2,
+                            Name = "Front-end"
+                        },
+                        new
+                        {
+                            ModuleId = 3,
+                            Name = "Back-end"
+                        },
+                        new
+                        {
+                            ModuleId = 4,
+                            Name = "Ciência da Computação"
+                        });
                 });
 
             modelBuilder.Entity("Tryitter.Api.Models.Post", b =>
