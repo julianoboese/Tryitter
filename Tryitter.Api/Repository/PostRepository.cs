@@ -13,31 +13,44 @@ public class PostRepository : IPostRepository
 
     public Post AddPost(Post post)
     {
-        throw new NotImplementedException();
+        _context.Posts.Add(post);
+
+        _context.SaveChanges();
+
+        return post;
     }
 
-    public Post DeletePost(int id)
+    public Post DeletePost(Post post)
     {
-        throw new NotImplementedException();
+        _context.Posts.Remove(post);
+
+        _context.SaveChanges();
+
+        return post;
     }
 
     public Post GetLastPostById(int studentId)
     {
+        /* var posts = _context.Posts.Where(s => s.StudentId == studentId); */
         throw new NotImplementedException();
     }
 
-    public Post GetPostById(int postId)
+    public Post? GetPostById(int postId)
     {
-        throw new NotImplementedException();
+        return _context.Posts.Find(postId);
     }
 
-    public Post GetPosts()
+    public IEnumerable<Post> GetPosts()
     {
-        throw new NotImplementedException();
+        return _context.Posts;
     }
 
-    public Post UpdatePost(Post post, int id)
+    public Post UpdatePost(Post post)
     {
-        throw new NotImplementedException();
+        _context.Posts.Update(post);
+
+        _context.SaveChanges();
+
+        return post;
     }
 }

@@ -4,11 +4,11 @@ namespace Tryitter.Api.Repository
 {
     public interface IPostRepository
     {
-        Post GetPostById(int postId);
-        Post GetLastPostById(int studentId);
-        Post GetPosts();
+        IEnumerable<Post> GetPosts();
+        Post? GetPostById(int postId);
+        Post? GetLastPostById(int postId);
         Post AddPost(Post post);
-        Post UpdatePost(Post post, int id);
-        Post DeletePost(int id);
+        Post UpdatePost(Post post);
+        Post DeletePost(Post post);
     }
 }
