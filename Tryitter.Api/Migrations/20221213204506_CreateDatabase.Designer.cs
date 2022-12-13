@@ -11,8 +11,8 @@ using Tryitter.Api.Repository;
 namespace Tryitter.Api.Migrations
 {
     [DbContext(typeof(TryitterContext))]
-    [Migration("20221208130829_AddModules")]
-    partial class AddModules
+    [Migration("20221213204506_CreateDatabase")]
+    partial class CreateDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -65,16 +65,20 @@ namespace Tryitter.Api.Migrations
             modelBuilder.Entity("Tryitter.Api.Models.Post", b =>
                 {
                     b.Property<int>("PostId")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PostId"), 1L, 1);
+
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("StudentId")
                         .HasColumnType("int");
 
                     b.HasKey("PostId");
+
+                    b.HasIndex("StudentId");
 
                     b.ToTable("Posts");
                 });
@@ -112,8 +116,8 @@ namespace Tryitter.Api.Migrations
             modelBuilder.Entity("Tryitter.Api.Models.Post", b =>
                 {
                     b.HasOne("Tryitter.Api.Models.Student", "Student")
-                        .WithMany("Posts")
-                        .HasForeignKey("PostId")
+                        .WithMany()
+                        .HasForeignKey("StudentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -123,22 +127,12 @@ namespace Tryitter.Api.Migrations
             modelBuilder.Entity("Tryitter.Api.Models.Student", b =>
                 {
                     b.HasOne("Tryitter.Api.Models.Module", "Module")
-                        .WithMany("Students")
+                        .WithMany()
                         .HasForeignKey("ModuleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Module");
-                });
-
-            modelBuilder.Entity("Tryitter.Api.Models.Module", b =>
-                {
-                    b.Navigation("Students");
-                });
-
-            modelBuilder.Entity("Tryitter.Api.Models.Student", b =>
-                {
-                    b.Navigation("Posts");
                 });
 #pragma warning restore 612, 618
         }

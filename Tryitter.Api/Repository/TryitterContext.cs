@@ -43,6 +43,6 @@ public class TryitterContext : DbContext, ITryitterContext
         modelBuilder.Entity<Post>()
             .HasOne(p => p.Student)
             .WithMany()
-            .HasForeignKey(p => p.PostId);
+            .HasForeignKey(p => p.StudentId);
     }
 }

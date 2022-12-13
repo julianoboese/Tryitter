@@ -1,43 +1,58 @@
+using Microsoft.Extensions.Hosting;
 using Tryitter.Api.Models;
 
 namespace Tryitter.Api.Repository;
 
 public class PostRepository : IPostRepository
 {
-  private readonly ITryitterContext _context;
+    private readonly ITryitterContext _context;
 
-  public PostRepository(ITryitterContext context)
-  {
-    _context = context;
-  }
+    public PostRepository(ITryitterContext context)
+    {
+        _context = context;
+    }
+
+    public IEnumerable<Post> GetPosts()
+    {
+        return _context.Posts;
+    }
+
+    public Post GetLastPost(int studentId)
+    {
+        var post = _context.Posts.OrderByDescending(p => p.PostId).FirstOrDefault(s => s.StudentId == studentId);
+
+        return post;
+    }
+
+    public Post? GetPostById(int postId)
+    {
+        return _context.Posts.Find(postId);
+    }
 
     public Post AddPost(Post post)
     {
-        throw new NotImplementedException();
+        _context.Posts.Add(post);
+
+        _context.SaveChanges();
+
+        return post;
     }
 
-    public Post DeletePost(int id)
+    public Post UpdatePost(Post post)
     {
-        throw new NotImplementedException();
+        _context.Posts.Update(post);
+
+        _context.SaveChanges();
+
+        return post;
     }
 
-    public Post GetLastPostById(int studentId)
+    public Post DeletePost(Post post)
     {
-        throw new NotImplementedException();
-    }
+        _context.Posts.Remove(post);
 
-    public Post GetPostById(int postId)
-    {
-        throw new NotImplementedException();
-    }
+        _context.SaveChanges();
 
-    public Post GetPosts()
-    {
-        throw new NotImplementedException();
-    }
-
-    public Post UpdatePost(Post post, int id)
-    {
-        throw new NotImplementedException();
+        return post;
     }
 }
