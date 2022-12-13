@@ -72,11 +72,14 @@ public class StudentController : ControllerBase
     [Authorize]
     public ActionResult<Student> UpdateStudent(int id, [FromBody] StudentInput studentInput)
     {
+        var loggedStudent = User.Identity as System.Security.Claims.ClaimsIdentity;
+        var loggedStudentId = loggedStudent!.FindFirst("StudentId").Value;
+
         var student = _studentRepository.GetStudentById(id);
 
-        if (student is null)
+        if (student is null || student.StudentId.ToString() != loggedStudentId)
         {
-            return NotFound("Pessoa estudante não encontrada.");
+            return Unauthorized("Você não pode editar esta pessoa estudante.");
         }
 
         student.Name = studentInput.Name;

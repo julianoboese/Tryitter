@@ -31,9 +31,10 @@ namespace Tryitter.Api.Controllers
                     return NotFound("Pessoa estudante não encontrada.");
                 }
 
+                student.Password = string.Empty;
+
                 authOutput.Student = student;
-                authOutput.Student.Password = string.Empty;
-                authOutput.Token = new TokenGenerator().Generate();
+                authOutput.Token = new TokenGenerator().Generate(student);
             }
             catch (Exception exception)
             {
