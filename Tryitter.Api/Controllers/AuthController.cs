@@ -28,7 +28,7 @@ namespace Tryitter.Api.Controllers
 
                 if (student == null)
                 {
-                    return NotFound("Pessoa estudante não encontrada.");
+                    return NotFound("Dados incorretos.");
                 }
 
                 student.Password = string.Empty;
