@@ -49,12 +49,16 @@ namespace Tryitter.Api.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public ActionResult<Post> AddPost([FromBody] PostInput postInput)
         {
+            var loggedStudent = User.Identity as System.Security.Claims.ClaimsIdentity;
+            var loggedStudentId = loggedStudent!.FindFirst("StudentId").Value;
+
             var post = new Post()
             {
                 Description = postInput.Description,
-                StudentId = postInput.StudentId
+                StudentId = int.Parse(loggedStudentId)
             };
 
             _postRepository.AddPost(post);
@@ -66,6 +70,9 @@ namespace Tryitter.Api.Controllers
         [Authorize]
         public ActionResult<Post> UpdatePost(int id, [FromBody] PostInput postInput)
         {
+            var loggedStudent = User.Identity as System.Security.Claims.ClaimsIdentity;
+            var loggedStudentId = loggedStudent!.FindFirst("StudentId").Value;
+
             var post = _postRepository.GetPostById(id);
 
             if (post is null)
@@ -74,7 +81,7 @@ namespace Tryitter.Api.Controllers
             }
 
             post.Description = postInput.Description;
-            post.StudentId = postInput.StudentId;
+            post.StudentId = int.Parse(loggedStudentId);
 
             _postRepository.UpdatePost(post);
 
