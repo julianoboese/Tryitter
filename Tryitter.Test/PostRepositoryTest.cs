@@ -73,7 +73,7 @@ namespace Tryitter.Test
         public readonly static TheoryData<TryitterContext, int, Post> TestGetPostByIdData = new()
         {
           {
-              Helpers.GetContextInstanceForTests("GetPostByIdData"), 1,
+              Helpers.GetContextInstanceForTests("TestGetPostById"), 1,
               new Post
               {
                 PostId = 1,
@@ -196,7 +196,7 @@ namespace Tryitter.Test
       };
 
       [Theory]
-      [MemberData(nameof(TestDeletePosttData))]
+      [MemberData(nameof(TestDeletePostData))]
       public void TestDeletePost(TryitterContext context, int id, List<Post> expectedPost)
       {
           // Arrange
