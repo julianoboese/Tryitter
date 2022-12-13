@@ -22,8 +22,21 @@ namespace Tryitter.Api.Controllers
             return Ok(_postRepository.GetPosts());
         }
 
+        [HttpGet("last")]
+        public ActionResult<Post> GetLastPost(int id)
+        {
+            var post = _postRepository.GetLastPost(id);
+
+            if (post is null)
+            {
+                return NotFound("Pessoa estudante não possui post.");
+            }
+
+            return Ok(post);
+        }
+
         [HttpGet("{id}", Name = "GetPostById")]
-        public ActionResult<Post> GetStudentById(int id)
+        public ActionResult<Post> GetPostById(int id)
         {
             var post = _postRepository.GetPostById(id);
 

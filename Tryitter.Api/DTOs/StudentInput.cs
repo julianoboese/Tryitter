@@ -7,10 +7,4 @@
         public string Password { get; set; }
         public int ModuleId { get; set; }
     }
-
-    public class PostInput
-    {
-        public string? Description { get; set; }
-        public int StudentId { get; set; }
-    }
 }
