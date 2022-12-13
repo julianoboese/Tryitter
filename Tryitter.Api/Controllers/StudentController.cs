@@ -96,11 +96,14 @@ public class StudentController : ControllerBase
     [Authorize]
     public ActionResult<Student> DeleteStudent(int id)
     {
+        var loggedStudent = User.Identity as System.Security.Claims.ClaimsIdentity;
+        var loggedStudentId = loggedStudent!.FindFirst("StudentId").Value;
+
         var student = _studentRepository.GetStudentById(id);
 
-        if (student is null)
+        if (student is null || student.StudentId.ToString() != loggedStudentId)
         {
-            return NotFound("Pessoa estudante não encontrada.");
+            return Unauthorized("Você não pode deletar esta pessoa estudante.");
         }
 
         _studentRepository.DeleteStudent(student);

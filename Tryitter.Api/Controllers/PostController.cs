@@ -23,13 +23,17 @@ namespace Tryitter.Api.Controllers
         }
 
         [HttpGet("last")]
-        public ActionResult<Post> GetLastPost(int id)
+        [Authorize]
+        public ActionResult<Post> GetLastPost()
         {
-            var post = _postRepository.GetLastPost(id);
+            var loggedStudent = User.Identity as System.Security.Claims.ClaimsIdentity;
+            var loggedStudentId = loggedStudent!.FindFirst("StudentId").Value;
+
+            var post = _postRepository.GetLastPost(int.Parse(loggedStudentId));
 
             if (post is null)
             {
-                return NotFound("Pessoa estudante não possui post.");
+                return NotFound("Você ainda não fez nenhum post.");
             }
 
             return Ok(post);
@@ -42,7 +46,7 @@ namespace Tryitter.Api.Controllers
 
             if (post is null)
             {
-                return NotFound("Pessoa estudante não possui post.");
+                return NotFound("Post não encontrado.");
             }
 
             return Ok(post);
@@ -75,9 +79,9 @@ namespace Tryitter.Api.Controllers
 
             var post = _postRepository.GetPostById(id);
 
-            if (post is null)
+            if (post is null || post.StudentId.ToString() != loggedStudentId)
             {
-                return NotFound("Post não encontrado.");
+                return Unauthorized("Você não pode editar este post.");
             }
 
             post.Description = postInput.Description;
@@ -92,11 +96,14 @@ namespace Tryitter.Api.Controllers
         [Authorize]
         public ActionResult<Post> DeletePost(int id)
         {
+            var loggedStudent = User.Identity as System.Security.Claims.ClaimsIdentity;
+            var loggedStudentId = loggedStudent!.FindFirst("StudentId").Value;
+
             var post = _postRepository.GetPostById(id);
 
-            if (post is null)
+            if (post is null || post.StudentId.ToString() != loggedStudentId)
             {
-                return NotFound("Post não encontrado.");
+                return Unauthorized("Você não pode deletar este post.");
             }
 
             _postRepository.DeletePost(post);
