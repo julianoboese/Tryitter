@@ -23,7 +23,7 @@ namespace Tryitter.Api.Controllers
         }
 
         [HttpGet("{id}", Name = "GetById")]
-        public ActionResult<Student> GetStudentById(int id)
+        public ActionResult<Post> GetStudentById(int id)
         {
             var post = _postRepository.GetPostById(id);
 
@@ -36,11 +36,12 @@ namespace Tryitter.Api.Controllers
         }
 
         [HttpPost]
-        public ActionResult<Student> AddPost([FromBody] PostInput postInput)
+        public ActionResult<Post> AddPost([FromBody] PostInput postInput)
         {
             var post = new Post()
             {
-                Description = postInput.Description
+                Description = postInput.Description,
+                StudentId = postInput.StudentId
             };
 
             _postRepository.AddPost(post);
@@ -60,6 +61,7 @@ namespace Tryitter.Api.Controllers
             }
 
             post.Description = postInput.Description;
+            post.StudentId = postInput.StudentId;
 
             _postRepository.UpdatePost(post);
 
@@ -68,7 +70,7 @@ namespace Tryitter.Api.Controllers
 
         [HttpDelete("{id}")]
         [Authorize]
-        public ActionResult<Student> DeletePost(int id)
+        public ActionResult<Post> DeletePost(int id)
         {
             var post = _postRepository.GetPostById(id);
 
