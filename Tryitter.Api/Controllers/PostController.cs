@@ -22,7 +22,7 @@ namespace Tryitter.Api.Controllers
             return Ok(_postRepository.GetPosts());
         }
 
-        [HttpGet("{id}", Name = "GetById")]
+        [HttpGet("{id}", Name = "GetPostById")]
         public ActionResult<Post> GetStudentById(int id)
         {
             var post = _postRepository.GetPostById(id);
@@ -46,7 +46,7 @@ namespace Tryitter.Api.Controllers
 
             _postRepository.AddPost(post);
 
-            return CreatedAtRoute("GetById", new { id = post.PostId }, post);
+            return CreatedAtRoute("GetPostById", new { id = post.PostId }, post);
         }
 
         [HttpPut("{id}")]

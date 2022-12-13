@@ -39,7 +39,7 @@ public class StudentController : ControllerBase
         return Ok(students);
     }
 
-    [HttpGet("{id}", Name = "GetById")]
+    [HttpGet("{id}", Name = "GetStudentById")]
     public ActionResult<Student> GetStudentById(int id)
     {
         var student = _studentRepository.GetStudentById(id);
@@ -65,7 +65,7 @@ public class StudentController : ControllerBase
 
         _studentRepository.AddStudent(student);
 
-        return CreatedAtRoute("GetById", new { id = student.StudentId }, student);
+        return CreatedAtRoute("GetStudentById", new { id = student.StudentId }, student);
     }
 
     [HttpPut("{id}")]
