@@ -9,7 +9,7 @@ namespace Tryitter.Test
     public class PostRepositoryTest
     {
         [Theory]
-        [MemberData(nameof(TestPostsData))]
+        [MemberData(nameof(TestPostData))]
         public void TestGetPosts(TryitterContext context, List<Post> expectedPosts)
         {
             // Arrange
@@ -22,7 +22,7 @@ namespace Tryitter.Test
             posts.Should().BeEquivalentTo(expectedPosts);
         }
 
-        public readonly static TheoryData<TryitterContext, List<Post>> PostsData = new()
+        public readonly static TheoryData<TryitterContext, List<Post>> TestPostData = new()
         {
           {
               Helpers.GetContextInstanceForTests("PostsData"), new()
