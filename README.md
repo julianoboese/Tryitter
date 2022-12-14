@@ -7,52 +7,48 @@ Este projeto consiste em criar uma API para ser consumida por uma aplicação qu
 
   - Fazer o login
   - Buscar todos os posts
-  - Buscar post por id do estudante
-  - Buscar último post de um estudante
-  - Adicionar post
-  - Atualizar post
-  - Deletar post
+  - Buscar post por id
+  - Buscar último post do estudante :lock:
+  - Adicionar post :lock:
+  - Atualizar post :lock:
+  - Deletar post :lock:
   - Buscar todos estudantes
-  - Buscar por id um estudante
+  - Buscar um estudante por id
   - Adicionar um estudante
-  - Atualizar um estudante
-  - Deletar um estudante
+  - Atualizar o estudante :lock:
+  - Deletar o estudante :lock:
 </details>
 
 ### 🔎 Orientações
 
-1. Clone o repositório:
-
-   - `https://github.com/julianoboese/Tryitter`
-
-   - Entre na pasta do repositório:
+1. Clone o repositório e entre na pasta do projeto:
 
     - `cd Tryitter`
   
-
-2. Instale as dependências com:
+2. Instale as dependências:
    
-     -  `dotnet restore`
+    -  `dotnet restore`
 
-3. Suba o container do banco de dados com:
+3. Suba o container do banco de dados:
    
-     - `docker-compose up -d`
+    - `docker-compose up -d`
 
-4. Use o comando abaixo para rodar as migrations:
+4. Rode as migrations:
    
-   - `dotnet ef database update`
+    - `dotnet ef database update`
   
-  OBS: este comando irá criar as tabelas POST, STUDENTS e MODULE, também será populada a tabela Module. As outras tabelas do bancos encontram-se vazias, para testar o seu funcionamento, rode aplicação e abra o Swagger para interagir com as rotas.
+OBS: este comando irá criar as tabelas Posts, Students e Modules e também será populada a tabela Modules. As outras tabelas do bancos encontram-se vazias. Para testar o seu funcionamento, rode aplicação e abra o Swagger para interagir com as rotas.
 
 5. Entre na pasta Tryitter.Api:
    
-   - `cd Tryitter.Api:`
+   - `cd Tryitter.Api`
 
-6. Para rodar a aplicação:
+6. Rode a aplicação:
    
    - `dotnet run`
 
 7. O link para o Swagger:
+
      - `https://localhost:7143/swagger/index.html`
 
 
