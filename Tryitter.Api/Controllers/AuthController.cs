@@ -3,11 +3,13 @@ using Tryitter.Api.DTOs;
 using Tryitter.Api.Services;
 using Tryitter.Api.ViewModels;
 using Tryitter.Api.Repository;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Tryitter.Api.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    [AllowAnonymous]
     public class AuthController : ControllerBase
     {
         private readonly IStudentRepository _studentRepository;

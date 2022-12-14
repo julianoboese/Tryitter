@@ -17,6 +17,7 @@ namespace Tryitter.Api.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public ActionResult<IEnumerable<Post>> GetPosts()
         {
             return Ok(_postRepository.GetPosts());
@@ -40,6 +41,7 @@ namespace Tryitter.Api.Controllers
         }
 
         [HttpGet("{id}", Name = "GetPostById")]
+        [AllowAnonymous]
         public ActionResult<Post> GetPostById(int id)
         {
             var post = _postRepository.GetPostById(id);

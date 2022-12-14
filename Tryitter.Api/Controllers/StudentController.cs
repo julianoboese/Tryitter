@@ -18,6 +18,7 @@ public class StudentController : ControllerBase
     }
 
     [HttpGet]
+    [AllowAnonymous]
     public ActionResult<IEnumerable<Student>> GetStudents([FromQuery] string? name)
     {
         IEnumerable<Student> students;
@@ -40,6 +41,7 @@ public class StudentController : ControllerBase
     }
 
     [HttpGet("{id}", Name = "GetStudentById")]
+    [AllowAnonymous]
     public ActionResult<Student> GetStudentById(int id)
     {
         var student = _studentRepository.GetStudentById(id);
@@ -53,6 +55,7 @@ public class StudentController : ControllerBase
     }
 
     [HttpPost]
+    [AllowAnonymous]
     public ActionResult<Student> AddStudent([FromBody] StudentInput studentInput)
     {
         var student = new Student()
