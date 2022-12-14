@@ -22,7 +22,7 @@ namespace Tryitter.Api
                         Reference = new OpenApiReference
                         {
                             Type = ReferenceType.SecurityScheme,
-                            Id = "basic"
+                            Id = "Bearer"
                         }
                     },
                     new List<string>()
