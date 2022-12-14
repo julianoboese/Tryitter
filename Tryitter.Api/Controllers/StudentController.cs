@@ -19,7 +19,7 @@ public class StudentController : ControllerBase
 
     [HttpGet]
     [AllowAnonymous]
-    public ActionResult<IEnumerable<Student>> GetStudents([FromQuery] string? name)
+    public ActionResult<IEnumerable<StudentOutput>> GetStudents([FromQuery] string? name)
     {
         IEnumerable<Student> students;
 
@@ -37,12 +37,27 @@ public class StudentController : ControllerBase
             return NotFound("Nenhuma pessoa estudante encontrada.");
         }
 
-        return Ok(students);
+        var studentOutputList = new List<StudentOutput>();
+
+        foreach (var student in students)
+        {
+            var studentOutput = new StudentOutput()
+            {
+                StudentId = student.StudentId,
+                Name= student.Name,
+                Email= student.Email,
+                ModuleId= student.ModuleId,
+            };
+
+            studentOutputList.Add(studentOutput);
+        }
+
+        return Ok(studentOutputList);
     }
 
     [HttpGet("{id}", Name = "GetStudentById")]
     [AllowAnonymous]
-    public ActionResult<Student> GetStudentById(int id)
+    public ActionResult<StudentOutput> GetStudentById(int id)
     {
         var student = _studentRepository.GetStudentById(id);
 
@@ -51,12 +66,20 @@ public class StudentController : ControllerBase
             return NotFound("Pessoa estudante não encontrada.");
         }
 
-        return Ok(student);
+        var studentOutput = new StudentOutput()
+        {
+            StudentId = student.StudentId,
+            Name = student.Name,
+            Email = student.Email,
+            ModuleId = student.ModuleId,
+        };
+
+        return Ok(studentOutput);
     }
 
     [HttpPost]
     [AllowAnonymous]
-    public ActionResult<Student> AddStudent([FromBody] StudentInput studentInput)
+    public ActionResult<StudentOutput> AddStudent([FromBody] StudentInput studentInput)
     {
         var student = new Student()
         {
@@ -68,12 +91,20 @@ public class StudentController : ControllerBase
 
         _studentRepository.AddStudent(student);
 
-        return CreatedAtRoute("GetStudentById", new { id = student.StudentId }, student);
+        var studentOutput = new StudentOutput()
+        {
+            StudentId = student.StudentId,
+            Name = student.Name,
+            Email = student.Email,
+            ModuleId = student.ModuleId,
+        };
+
+        return CreatedAtRoute("GetStudentById", new { id = studentOutput.StudentId }, studentOutput);
     }
 
     [HttpPut("{id}")]
     [Authorize]
-    public ActionResult<Student> UpdateStudent(int id, [FromBody] StudentInput studentInput)
+    public ActionResult<StudentOutput> UpdateStudent(int id, [FromBody] StudentInput studentInput)
     {
         var loggedStudent = User.Identity as System.Security.Claims.ClaimsIdentity;
         var loggedStudentId = loggedStudent!.FindFirst("StudentId").Value;
@@ -92,12 +123,20 @@ public class StudentController : ControllerBase
 
         _studentRepository.UpdateStudent(student);
 
-        return Ok(studentInput);
+        var studentOutput = new StudentOutput()
+        {
+            StudentId = student.StudentId,
+            Name = student.Name,
+            Email = student.Email,
+            ModuleId = student.ModuleId,
+        };
+
+        return Ok(studentOutput);
     }
 
     [HttpDelete("{id}")]
     [Authorize]
-    public ActionResult<Student> DeleteStudent(int id)
+    public ActionResult<StudentOutput> DeleteStudent(int id)
     {
         var loggedStudent = User.Identity as System.Security.Claims.ClaimsIdentity;
         var loggedStudentId = loggedStudent!.FindFirst("StudentId").Value;
